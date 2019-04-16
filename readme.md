@@ -1,4 +1,4 @@
 # Mini Project 3 
-##FAQ Application
+## FAQ Application
 
 ### hoa44@njit.edu
