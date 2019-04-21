@@ -16,7 +16,7 @@ class AnswerSeeder extends Seeder
     {
         $users = User::inRandomOrder();
 
-        for ($i = 1; $i <= 4; $i++) {
+        for ($i = 1; $i <= 6; $i++) {
             // $users = User::All();
             $users->each(function ($user) {
                 $question = Question::inRandomOrder()->first();
