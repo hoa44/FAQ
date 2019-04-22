@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    hoa44 Mini Pjroject #3 IS-601, FAQ Application
                 </div>
 
                 <div class="links">
