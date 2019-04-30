@@ -15,13 +15,16 @@ class AnswerSeeder extends Seeder
     public function run()
     {
         $users = User::inRandomOrder();
-       // $users = User::All();
-        $users->each(function ($user) {
-            $question = Question::inRandomOrder()->first();
-            $answer = factory(Answer::class)->make();
-            $answer->user()->associate($user);
-            $answer->question()->associate($question);
-            $answer->save();
-        });
+
+        for ($i = 1; $i <= 6; $i++) {
+            // $users = User::All();
+            $users->each(function ($user) {
+                $question = Question::inRandomOrder()->first();
+                $answer = factory(Answer::class)->make();
+                $answer->user()->associate($user);
+                $answer->question()->associate($question);
+                $answer->save();
+            });
+        }
     }
 }
