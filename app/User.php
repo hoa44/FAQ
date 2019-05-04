@@ -2,13 +2,17 @@
 
 namespace App;
 
+use AbstractEverything\Poll\Extras\PollUser;
+use AbstractEverything\Poll\Extras\PollUserInterface;
+use AbstractEverything\Poll\Models\Poll;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements PollUserInterface
 {
     use Notifiable;
+    use PollUser;
 
     /**
      * The attributes that are mass assignable.
@@ -52,4 +56,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function hasVoted(Poll $poll)
+    {
+        // TODO: Implement hasVoted() method.
+        //return $this->hasMany('App\Poll');
+    }
 }
