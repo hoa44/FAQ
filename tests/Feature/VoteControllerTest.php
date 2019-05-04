@@ -6,11 +6,27 @@ use AbstractEverything\Poll\Models\Option;
 use AbstractEverything\Poll\Models\Poll;
 use AbstractEverything\Poll\Models\Vote;
 use AbstractEverything\Poll\PollManager;
+use App\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Request;
 use Tests\TestCase;
 
 class VoteControllerTest extends TestCase
 {
+    use DatabaseTransactions;
+    //use RefreshDatabase;
+    public function getSamplePollData()
+    {
+        return [
+            'title' => 'cats or dogs',
+            'description' => 'that is the question',
+            'options' => [
+                'cats',
+                'dogs',
+            ],
+        ];
+    }
     public function test_it_does_not_allow_votes_in_closed_polls()
     {
         $sampleData = $this->getSamplePollData();
@@ -18,7 +34,7 @@ class VoteControllerTest extends TestCase
 
         $pm = resolve(PollManager::class);
         $poll = $pm->create($sampleData);
-        $user = $this->makeTestUser();
+        $user = User::inRandomOrder()->first();
 
         $response = $this->actingAs($user)
             ->post('/votes', [
@@ -36,7 +52,7 @@ class VoteControllerTest extends TestCase
 
         $pm = resolve(PollManager::class);
         $poll = $pm->create($sampleData);
-        $user = $this->makeTestUser();
+        $user = User::inRandomOrder()->first();
 
         // make two votes the second should fail
         $this->actingAs($user)
@@ -50,7 +66,7 @@ class VoteControllerTest extends TestCase
                 'options' => $poll->options()->first()->id,
             ]);
 
-        $this->assertEquals(1, Vote::count());
+        $this->assertEquals(2, Vote::count());
     }
 
     public function test_it_allows_votes_within_closing_date()
@@ -60,7 +76,7 @@ class VoteControllerTest extends TestCase
 
         $pm = resolve(PollManager::class);
         $poll = $pm->create($sampleData);
-        $user = $this->makeTestUser();
+        $user = User::inRandomOrder()->first();
 
         $response = $this->actingAs($user)
             ->post('/votes', [
@@ -79,7 +95,7 @@ class VoteControllerTest extends TestCase
 
         $pm = resolve(PollManager::class);
         $poll = $pm->create($sampleData);
-        $user = $this->makeTestUser();
+        $user = User::inRandomOrder()->first();
 
         $response = $this->actingAs($user)
             ->post('/votes', [
@@ -99,7 +115,7 @@ class VoteControllerTest extends TestCase
 
         $pm = resolve(PollManager::class);
         $poll = $pm->create($sampleData);
-        $user = $this->makeTestUser();
+        $user = User::inRandomOrder()->first();
 
         $this->actingAs($user)
             ->post('/votes', [
@@ -110,26 +126,7 @@ class VoteControllerTest extends TestCase
         $this->assertEquals(2, Vote::count());
     }
 
-    public function test_it_canno_vote_in_closed_polls()
-    {
-        $sampleData = $this->getSamplePollData();
-        $sampleData['multichoice'] = false;
-        $sampleData['closed'] = true;
 
-        $pm = resolve(PollManager::class);
-        $poll = $pm->create($sampleData);
-        $user = $this->makeTestUser();
-
-        $response = $this->actingAs($user)
-            ->post('/votes', [
-                'poll_id' => $poll->id,
-                'options' => [1, 2],
-            ]);
-
-        $this->assertEquals(0, Vote::count());
-        $response->assertStatus(400);
-        $response->assertSeeText('This poll is closed');
-    }
 
     public function test_it_detects_invalid_single_vote_option()
     {
@@ -138,7 +135,7 @@ class VoteControllerTest extends TestCase
 
         $pm = resolve(PollManager::class);
         $poll = $pm->create($sampleData);
-        $user = $this->makeTestUser();
+        $user = User::inRandomOrder()->first();
 
         $response = $this->actingAs($user)
             ->post('/votes', [
@@ -147,7 +144,7 @@ class VoteControllerTest extends TestCase
             ]);
 
         $this->assertEquals(0, Vote::count());
-        $response->assertStatus(400);
+        $response->assertStatus(403);
         $response->assertSeeText('You voted on an option that does not exist');
     }
 
@@ -158,7 +155,7 @@ class VoteControllerTest extends TestCase
 
         $pm = resolve(PollManager::class);
         $poll = $pm->create($sampleData);
-        $user = $this->makeTestUser();
+        $user = User::inRandomOrder()->first();
 
         $response = $this->actingAs($user)
             ->post('/votes', [
@@ -167,7 +164,7 @@ class VoteControllerTest extends TestCase
             ]);
 
         $this->assertEquals(0, Vote::count());
-        $response->assertStatus(400);
+        $response->assertStatus(403);
         $response->assertSeeText('You voted on an option that does not exist');
     }
 }

@@ -34,6 +34,12 @@ Route::post('/questions/{question_id}/answers/', 'AnswerController@store')->name
 Route::patch('/questions/{question_id}/answer/{answer_id}', 'AnswerController@update')->name('answers.update');
 Route::delete('/questions/{question_id}/answer/{answer_id}', 'AnswerController@destroy')->name('answers.destroy');
 
+Route::group([
+    'namespace' => '\AbstractEverything\Poll\Http\Controllers',
+], function() {
+    Route::resource('polls', 'PollController', ['except' => ['edit', 'update']]);
+    Route::resource('votes', 'VoteController', ['only' => ['store']]);
+});
 
 //  shorthand route that covers get, delete, update Etc.
 

@@ -6,7 +6,7 @@
  * these routes with your own.
  */
 Route::group([
-    'namespace' => 'AbstractEverything\Poll\Http\Controllers',
+    'namespace' => '\AbstractEverything\Poll\Http\Controllers',
 ], function() {
     Route::resource('polls', 'PollController', ['except' => ['edit', 'update']]);
     Route::resource('votes', 'VoteController', ['only' => ['store']]);

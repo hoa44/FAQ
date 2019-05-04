@@ -61,5 +61,7 @@ class User extends Authenticatable implements PollUserInterface
     {
         // TODO: Implement hasVoted() method.
         //return $this->hasMany('App\Poll');
+        //if (auth()->user()->hasVoted($poll))
+           // echo 'User has voted';
     }
 }
