@@ -36,4 +36,23 @@ class UserTest extends TestCase
         $user = factory(\App\User::class)->make();
         $this->assertTrue(is_object($user->profile()->get()));
     }
+
+    //  The following tests are for testing the admin users.
+
+    public function a_default_user_is_not_an_admin()
+    {
+        $user = factory(User::class)->create();
+
+        $this->assertFalse($user->isAdmin());
+    }
+
+    /** @test */
+    public function an_admin_user_is_an_admin()
+    {
+        $admin = factory(User::class)
+            ->states('admin')
+            ->create();
+
+        $this->assertTrue($admin->isAdmin());
+    }
 }

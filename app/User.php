@@ -14,13 +14,16 @@ class User extends Authenticatable implements PollUserInterface
     use Notifiable;
     use PollUser;
 
+    const ADMIN_TYPE = 'admin';
+    const DEFAULT_TYPE = 'default';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'email', 'password',
+        'email', 'password','type',
     ];
 
     /**
@@ -47,6 +50,10 @@ class User extends Authenticatable implements PollUserInterface
         return $this->hasMany('App\Answer');
     }
 
+    public function isAdmin()
+    {
+        return $this->type === self::ADMIN_TYPE;
+    }
 
     /**
      * The attributes that should be cast to native types.
