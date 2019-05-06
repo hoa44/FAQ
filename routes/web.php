@@ -46,3 +46,5 @@ Route::group([
 Route::resources([
     'questions' => 'QuestionController',
 ]);
+
+Route::get('/admin', 'HomeController@admin')->middleware('is_admin')->name('admin');

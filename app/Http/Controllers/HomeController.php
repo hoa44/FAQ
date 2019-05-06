@@ -28,4 +28,9 @@ class HomeController extends Controller
         $questions = $user->questions()->paginate(6);
         return view('home')->with('questions', $questions);
     }
+
+    public function admin()
+    {
+        return view('admin');
+    }
 }

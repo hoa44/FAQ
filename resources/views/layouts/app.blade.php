@@ -34,6 +34,8 @@
                 <a class="navbar-brand" href="{{ route('home') }}">
                     Home
                 </a>
+
+
             @endguest
 
 
@@ -62,6 +64,10 @@
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @if(Auth::user()->isAdmin())
+                                    <a href="{{ route('admin') }}" class="dropdown-item ">Admin</a>
+                                @endif
+
                                 @if (Auth::user()->profile)
                                     <a class="dropdown-item"
                                        href="{{ route('profile.show', ['user_id' => Auth::user()->id,'profile_id' => Auth::user()->profile->id]) }}">My
@@ -72,6 +78,8 @@
                                        href="{{ route('profile.create', ['user_id' => Auth::user()->id]) }}">Create
                                         Profile</a>
                                 @endif
+
+
 
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
