@@ -35,6 +35,10 @@
                     Home
                 </a>
 
+                <a class="no-underline uppercase text-lg-center ml-5 " href="{{ url('/polls/1') }}">
+                    User Survey Polls Are Open!
+                </a>
+
 
             @endguest
 
