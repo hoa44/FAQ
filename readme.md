@@ -39,4 +39,4 @@ In order to utilize the User polling feature and to verify that the Admin middle
 4.  Under the 'My Account'  drop down menu you should now see and Admin link which, when clicked will take you to the middleware protected admin page that says "For admin users only"
 
 5.  There are 3 Feature tests as follows:  PollControllerTest.php, VoteControllerTest.php, and AdminTest.php.  The Unit UserTest.php was updated to include admin user tests.  If you want to run these test it is
- recommended to backup the sqlite db, or reseed the databse first or tests will fail.
+ recommended to backup the current sqlite db, and reseed the database first or tests will fail.
