@@ -16,4 +16,14 @@ conditional routing that indicated when a user has reached the end of the polls.
 
 Both the poll and admin middleware were created using a test driven approach
 
-### Usage Instructions:
+### Usage Instructions for Grading:
+
+
+In order to utilize the User polling feature and to verify that the Admin middleware is setup and working please follow these instructions.
+
+1. Access the FAQ application here [https://faq-hoa44.herokuapp.com/]
+
+2. Use the following user credentials to login to the FAQ App.
+
+    email:  erik.champlin@example.org
+    pwd: password
