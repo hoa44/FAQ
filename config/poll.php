@@ -18,6 +18,6 @@ return [
     // To use the default views from the package use 'poll::'
     // If you publish these views and want to modify them set
     // this to 'vendor.abstracteverything.poll.'
-    'views_base_path' => 'poll::',
+    'views_base_path' => 'vendor.abstracteverything.poll.',
 
 ];
