@@ -12,10 +12,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Request;
 use Tests\TestCase;
 
+
 class VoteControllerTest extends TestCase
 {
     use DatabaseTransactions;
-    //use RefreshDatabase;
+    // use RefreshDatabase;
     public function getSamplePollData()
     {
         return [

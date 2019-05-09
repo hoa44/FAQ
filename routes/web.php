@@ -48,3 +48,4 @@ Route::resources([
 ]);
 
 Route::get('/admin', 'HomeController@admin')->middleware('is_admin')->name('admin');
+
