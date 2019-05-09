@@ -13,7 +13,7 @@ return [
 
     // The middleware used to protect certain routes, this can be
     // set to null to disable it entirely
-    'admin_middleware' => 'is_admin',
+    'admin_middleware' => 'auth',
 
     // To use the default views from the package use 'poll::'
     // If you publish these views and want to modify them set
