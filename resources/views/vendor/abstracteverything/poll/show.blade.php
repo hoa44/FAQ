@@ -24,10 +24,12 @@
     </div>
 </div>
 
-@auth(config('poll.admin_middleware'))
-    <form action="{{ route('polls.destroy', $poll->id) }}" method="POST" role="form">
-        <button type="submit" class="btn btn-danger">Delete poll</button>
-    </form>
-@endauth
+@if ($poll->id+1<=4)
+    <a class="btn btn-info" href=" {{ route('polls.show', $poll->id+1) }} " >
+        Next Poll</a>
+@else
+    <a class="btn btn-danger" href=" {{ url('/') }} " >
+        The End</a>
+@endif
 
 @endsection
