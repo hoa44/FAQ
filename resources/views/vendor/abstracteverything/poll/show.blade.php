@@ -30,6 +30,6 @@
 @else
     <a class="btn btn-danger" href=" {{ url('/') }} " >
         The End</a>
-@endif
+@endif 
 
 @endsection
